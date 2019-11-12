@@ -25,6 +25,7 @@
 <form action="updateRemoveServletController" method="post">
     <table>
         <tr>
+            <th> For Delete</th>
             <th>Name</th>
             <th>Mass</th>
             <th>Habitable</th>

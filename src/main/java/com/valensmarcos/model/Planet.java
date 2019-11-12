@@ -1,16 +1,16 @@
 package com.valensmarcos.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Planet {
+public class Planet implements Serializable {
+    private long id;
     private String name;
     private float mass;
-    private int habitable;
+    private boolean habitable;
 
-    public Planet(String name, float mass, int habitable) {
-        this.name = name;
-        this.mass = mass;
-        this.habitable = habitable;
+    public Planet() {
+
     }
 
     public String getName() {
@@ -29,11 +29,11 @@ public class Planet {
         this.mass = mass;
     }
 
-    public int getHabitable() {
+    public boolean isHabitable() {
         return habitable;
     }
 
-    public void setHabitable(int habitable) {
+    public void setHabitable(boolean habitable) {
         this.habitable = habitable;
     }
 

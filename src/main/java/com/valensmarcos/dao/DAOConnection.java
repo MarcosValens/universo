@@ -1,12 +1,12 @@
-package com.valensmarcos.controller;
+package com.valensmarcos.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectionController {
+public class DAOConnection {
     private static Connection conn = null;
-    private ConnectionController(){
+    private DAOConnection(){
         String url = "jdbc:mysql://localhost:3306/univers";
         String driver = "com.mysql.cj.jdbc.Driver";
         String user = "marcos";
@@ -22,7 +22,7 @@ public class ConnectionController {
 
     public static Connection getConnection(){
         if (conn == null){
-            new ConnectionController();
+            new DAOConnection();
         }
         return conn;
     }

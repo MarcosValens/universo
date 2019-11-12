@@ -11,7 +11,9 @@ public interface DAO<T> {
 
     void save(T t) throws SQLException;
 
-    void update(T t, String[] params);
+    default void update(T t, String[] params) throws Exception {
+        throw new Exception();//POR SI QUIERES QUE SE NO SE TENGA QUE IMPLEMENTAR ESTE METODO
+    }
 
     void delete(T t);
 }

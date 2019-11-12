@@ -1,6 +1,5 @@
 package com.valensmarcos.dao;
 
-import com.valensmarcos.controller.ConnectionController;
 import com.valensmarcos.model.Planet;
 
 import java.sql.Connection;
@@ -12,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class DAOPlanet implements DAO<Planet> {
-    private Connection conn = ConnectionController.getConnection();
+    private Connection conn = DAOConnection.getConnection();
     private Statement stmt = conn.createStatement();
     private String sql;
 
@@ -38,11 +37,16 @@ public class DAOPlanet implements DAO<Planet> {
         ResultSet rs = stmt.executeQuery(sql);
         while(rs.next()){
             String namePlanet = rs.getString("nom");
-            float massaPlanet = rs.getFloat("massa");
-            int habitablePlanet = rs.getInt("habitable");
-            Planet planet = new Planet(namePlanet,massaPlanet,habitablePlanet);
+            float massPlanet = rs.getFloat("massa");
+            boolean habitablePlanet = rs.getBoolean("habitable");
+            Planet planet = new Planet();
+            planet.setName(namePlanet);
+            planet.setMass(massPlanet);
+            planet.setHabitable(habitablePlanet);
             planets.add(planet);
         }
+        stmt.close();
+        conn.close();
         return planets;
     }
 
@@ -50,9 +54,11 @@ public class DAOPlanet implements DAO<Planet> {
     public void save(Planet planet) throws SQLException {
         String namePlanet = planet.getName();
         float massPlanet = planet.getMass();
-        int habitablePlanet = planet.getHabitable();
+        boolean habitablePlanet = planet.isHabitable();
         sql = "insert into planeta(nom,massa,habitable) value('"+namePlanet+"',"+massPlanet+","+habitablePlanet+")";
         stmt.executeUpdate(sql);
+        stmt.close();
+        conn.close();
     }
 
     @Override

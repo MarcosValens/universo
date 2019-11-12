@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "addPlanet", urlPatterns = "/addPlanet")
-public class InsertPlanetController extends HttpServlet {
+public class PlanterFormController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,8 +39,11 @@ public class InsertPlanetController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String namePlanet = req.getParameter("namePlanet");
         float massPlanet = Float.parseFloat(req.getParameter("massPlanet")) ;
-        int habitablePlanet = Integer.parseInt(req.getParameter("habitablePlanet"));
-        Planet planet = new Planet(namePlanet,massPlanet,habitablePlanet);
+        boolean habitablePlanet = Boolean.parseBoolean(req.getParameter("habitablePlanet"));
+        Planet planet = new Planet();
+        planet.setName(namePlanet);
+        planet.setMass(massPlanet);
+        planet.setHabitable(habitablePlanet);
         DAOPlanet daoPlanet = null;
         try {
             daoPlanet = new DAOPlanet();
