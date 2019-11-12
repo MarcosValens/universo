@@ -13,27 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "addPlanet", urlPatterns = "/addPlanet")
-public class PlanterFormController extends HttpServlet {
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DAOPlanet daoPlanet = null;
-        try {
-            daoPlanet = new DAOPlanet();
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-        List planets = new ArrayList<>();
-        try {
-            assert daoPlanet != null;
-            planets = daoPlanet.getAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        req.setAttribute("planets",planets);
-        req.getRequestDispatcher("/").forward(req,resp);
-    }
+@WebServlet(name = "PlanetFormController", urlPatterns = "/addPlanet")
+public class PlanetFormController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -66,6 +47,6 @@ public class PlanterFormController extends HttpServlet {
         req.setAttribute("namePlanet",namePlanet);
         req.setAttribute("planeta", planet);
 
-        req.getRequestDispatcher("/planetDone.jsp").forward(req,resp);
+        req.getRequestDispatcher("/planet.jsp").forward(req,resp);
     }
 }

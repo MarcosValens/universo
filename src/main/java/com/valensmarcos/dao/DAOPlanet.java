@@ -36,17 +36,18 @@ public class DAOPlanet implements DAO<Planet> {
         List<Planet> planets = new ArrayList<>();
         ResultSet rs = stmt.executeQuery(sql);
         while(rs.next()){
+            long idPlanet = rs.getInt("idplaneta");
             String namePlanet = rs.getString("nom");
             float massPlanet = rs.getFloat("massa");
             boolean habitablePlanet = rs.getBoolean("habitable");
             Planet planet = new Planet();
+            planet.setId(idPlanet);
             planet.setName(namePlanet);
             planet.setMass(massPlanet);
             planet.setHabitable(habitablePlanet);
             planets.add(planet);
         }
-        stmt.close();
-        conn.close();
+
         return planets;
     }
 
@@ -57,8 +58,7 @@ public class DAOPlanet implements DAO<Planet> {
         boolean habitablePlanet = planet.isHabitable();
         sql = "insert into planeta(nom,massa,habitable) value('"+namePlanet+"',"+massPlanet+","+habitablePlanet+")";
         stmt.executeUpdate(sql);
-        stmt.close();
-        conn.close();
+
     }
 
     @Override
