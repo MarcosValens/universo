@@ -16,11 +16,18 @@ public class DAOPlanet implements DAO<Planet> {
     private Statement stmt = conn.createStatement();
     private String sql;
 
+
     public DAOPlanet() throws SQLException {
     }
 
     @Override
-    public Optional get(long id) {
+    public Optional get(String[] name) {
+        sql = "select * from planeta where nom in ('";
+        for (String s : name) {
+
+        }
+        System.out.println(sql);
+
         return Optional.empty();
     }
 

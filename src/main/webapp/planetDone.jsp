@@ -8,6 +8,20 @@
 <body>
 
 <p>You added "${namePlanet}" to the database!!</p>
-<p>You can now <a href="index.jsp">add another planet</a> or <a href="addSatellite.jsp">add a satellite</a>. </p>
+<p>You can now <a href="http://localhost:8080/universo_war_exploded/addPlanet">add another planet</a> or <a href="addSatellite.jsp">add a satellite</a>. </p>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Mass</th>
+        <th>Habitable</th>
+    </tr>
+    <c:forEach var="planet" items="${planets}">
+        <tr>
+            <td>${planet.getName()}</td>
+            <td>${planet.getMass()}</td>
+            <td>${planet.getHabitable()}</td>
+        </tr>
+    </c:forEach>
+</table>
 </body>
 </html>
