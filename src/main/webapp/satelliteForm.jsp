@@ -1,16 +1,25 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: marcos
-  Date: 12/11/19
-  Time: 17:05
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page isELIgnored="false"%>
 <html>
 <head>
-    <title>satellitForm</title>
+    <title>satelliteForm</title>
 </head>
 <body>
-
+<form action="addSatellite" method="post">
+    <label for="nameSatellite">Name Satellite:</label>
+    <br>
+    <input type="text" name="nameSatellite" id="nameSatellite">
+    <br>
+    <label for="massSatellite">Mass:</label>
+    <br>
+    <input type="text" name="massSatellite" id="massSatellite">
+    <br>
+    <label for="speedSatellite">Speed:</label>
+    <br>
+    <input type="text" name="speedSatellite" id="speedSatellite">
+    <br><br>
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>

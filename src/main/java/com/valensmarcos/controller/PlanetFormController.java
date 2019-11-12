@@ -44,9 +44,6 @@ public class PlanetFormController extends HttpServlet {
             e.printStackTrace();
         }
         req.setAttribute("planets",planets);
-        req.setAttribute("namePlanet",namePlanet);
-        req.setAttribute("planeta", planet);
-
         req.getRequestDispatcher("/planet.jsp").forward(req,resp);
     }
 }
