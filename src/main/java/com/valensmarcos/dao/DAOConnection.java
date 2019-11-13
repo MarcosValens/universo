@@ -21,10 +21,18 @@ public class DAOConnection {
         }
     }
 
-    public static DAOConnection getConnection(){
+    public synchronized static DAOConnection getConnection(){
         if (connection == null){
             connection = new DAOConnection();
         }
         return connection;
+    }
+
+    public void desconection(){
+        try {
+            this.conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
