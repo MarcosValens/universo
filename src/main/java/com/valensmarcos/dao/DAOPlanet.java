@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class DAOPlanet implements DAO<Planet> {
-    private Connection conn = DAOConnection.getConnection();
+    private DAOConnection conn = DAOConnection.getConnection();
     private Statement stmt = conn.createStatement();
     private String sql;
 

@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "SatelliteFormController", urlPatterns = {"/addSatellite","/satellite"})
+@WebServlet(name = "SatelliteFormController", urlPatterns = "/addSatellite")
 public class SatelliteFormController extends HttpServlet {
 
     @Override

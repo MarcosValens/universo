@@ -2,7 +2,7 @@ package com.valensmarcos.dao;
 
 import com.valensmarcos.model.Satellite;
 
-import java.sql.Connection;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class DAOSatellite implements DAO<Satellite> {
 
-    private Connection conn = DAOConnection.getConnection();
+    private DAOConnection conn = DAOConnection.getConnection();
     private Statement stmt = conn.createStatement();
     private String sql;
 

@@ -5,7 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DAOConnection {
-    private static Connection conn = null;
+    private Connection conn = null;
+    private static DAOConnection connection;
     private DAOConnection(){
         String url = "jdbc:mysql://localhost:3306/univers";
         String driver = "com.mysql.cj.jdbc.Driver";
@@ -20,10 +21,10 @@ public class DAOConnection {
         }
     }
 
-    public static Connection getConnection(){
-        if (conn == null){
-            new DAOConnection();
+    public static DAOConnection getConnection(){
+        if (connection == null){
+            connection = new DAOConnection();
         }
-        return conn;
+        return connection;
     }
 }
