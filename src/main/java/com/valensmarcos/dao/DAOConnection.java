@@ -21,11 +21,11 @@ public class DAOConnection {
         }
     }
 
-    public synchronized static DAOConnection getConnection(){
+    public synchronized static Connection getConnection(){
         if (connection == null){
             connection = new DAOConnection();
         }
-        return connection;
+        return connection.conn;
     }
 
     public void desconection(){

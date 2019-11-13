@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DAO<T> {
-    Optional<T> get(String[] name);
+    T get(long id);
 
-    List<T> getAll() throws SQLException;
+    List<T> getAll();
 
-    void save(T t) throws SQLException;
+    void save(T t);
 
-    default void update(T t, String[] params) throws Exception {
-        throw new Exception();//POR SI QUIERES QUE SE NO SE TENGA QUE IMPLEMENTAR ESTE METODO
+    default void update(T t) /*throws Exception*/ {
+        /*throw new Exception();//POR SI QUIERES QUE SE NO SE TENGA QUE IMPLEMENTAR ESTE METODO*/
     }
 
     void delete(T t);

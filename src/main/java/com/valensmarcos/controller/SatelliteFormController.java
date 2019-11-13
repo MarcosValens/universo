@@ -33,18 +33,10 @@ public class SatelliteFormController extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        try {
-            assert daoSatellite != null;
-            daoSatellite.save(satellite);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        List satellites = new ArrayList<>();
-        try {
-            satellites = daoSatellite.getAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        assert daoSatellite != null;
+        daoSatellite.save(satellite);
+        List satellites;
+        satellites = daoSatellite.getAll();
         req.setAttribute("satellites",satellites);
         if (req.getRequestURL().toString().equals("/satellite")){
             req.getRequestDispatcher("satellite.jsp").forward(req,resp);}
