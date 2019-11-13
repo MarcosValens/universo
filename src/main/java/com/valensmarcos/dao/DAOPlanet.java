@@ -12,7 +12,7 @@ public class DAOPlanet implements DAO<Planet> {
     private String sql;
 
 
-    public DAOPlanet() throws SQLException {
+    public DAOPlanet() {
     }
 
     @Override
@@ -37,10 +37,10 @@ public class DAOPlanet implements DAO<Planet> {
     }
 
     @Override
-    public List getAll() {
+    public List<Planet> getAll() {
         List<Planet> planets = new ArrayList<>();
         sql = "select * from planeta";
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement;
         try {
             preparedStatement = conn.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();

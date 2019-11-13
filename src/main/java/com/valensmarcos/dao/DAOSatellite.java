@@ -26,9 +26,9 @@ public class DAOSatellite implements DAO<Satellite> {
 
     @Override
     public List<Satellite> getAll() {
-        List<Satellite> satellites = new ArrayList<Satellite>();
+        ArrayList satellites = new ArrayList();
         sql = "select * from satelit";
-        ResultSet rs = null;
+        ResultSet rs;
         try {
             rs = stmt.executeQuery(sql);
             while(rs.next()){

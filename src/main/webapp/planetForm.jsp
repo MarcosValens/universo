@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ page isELIgnored="false" %>
 <html>
 <head>
@@ -18,7 +18,7 @@
     <label for="habitablePlanet">Habitable:</label>
     <br>
     <input type="checkbox" name="habitablePlanet" id="habitablePlanet"
-           value="SI" ${(planet.isHabitable())?"checked":""}>
+           value="0" ${(planet.isHabitable())?"checked":""}>
     <br><br>
     <input type="submit" value="Submit">
 </form>

@@ -1,8 +1,6 @@
 package com.valensmarcos.controller;
 
-import com.valensmarcos.dao.DAOPlanet;
 import com.valensmarcos.dao.DAOSatellite;
-import com.valensmarcos.model.Planet;
 import com.valensmarcos.model.Satellite;
 
 import javax.servlet.ServletException;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "SatelliteFormController", urlPatterns = "/addSatellite")
