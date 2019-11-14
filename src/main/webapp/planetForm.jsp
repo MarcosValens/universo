@@ -18,7 +18,7 @@
     <label for="habitablePlanet">Habitable:</label>
     <br>
     <input type="checkbox" name="habitablePlanet" id="habitablePlanet"
-           value="0" ${(planet.isHabitable())?"checked":""}>
+           value="true" ${(planet.isHabitable())?"checked":""}>
     <br><br>
     <input type="submit" value="Submit">
 </form>
