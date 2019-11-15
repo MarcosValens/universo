@@ -31,19 +31,11 @@ public class PlanetFormController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String namePlanet = req.getParameter("namePlanet");
         float massPlanet = Float.parseFloat(req.getParameter("massPlanet"));
-        boolean habitablePlanet = Boolean.parseBoolean(req.getParameter("habitablePlanet"));
-        System.out.println(req.getParameter("habitablePlanet"));
-        System.out.println(habitablePlanet);
-
-
-
-
-
-
-
-
-
-
+        boolean habitablePlanet = false;
+        if (req.getParameter("habitablePlanet") != null){
+            habitablePlanet = true;
+        }
+        /*habitablePlanet = Boolean.parseBoolean(req.getParameter("habitablePlanet"));*/
         List planets;
         Planet planet = new Planet();
         planet.setName(namePlanet);
@@ -51,22 +43,13 @@ public class PlanetFormController extends HttpServlet {
         planet.setHabitable(habitablePlanet);
         DAOPlanet daoPlanet;
         daoPlanet = new DAOPlanet();
-        if (req.getParameter("id") == null) {
-
-
-
-
-
-
-
-
-
-
+        if (req.getParameter("idPlanet").equals("")) {
             daoPlanet.save(planet);
             planets = daoPlanet.getAll();
             req.setAttribute("planets", planets);
             req.getRequestDispatcher("/planet.jsp").forward(req, resp);
         } else {
+            planet.setId(Long.parseLong(req.getParameter("idPlanet")));
             daoPlanet.update(planet);
             planets = daoPlanet.getAll();
             req.setAttribute("planets", planets);

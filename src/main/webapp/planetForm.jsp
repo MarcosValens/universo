@@ -7,6 +7,7 @@
 </head>
 <body>
 <form action="addPlanet" method="post">
+    <input type="hidden" name="idPlanet" value="${planet.getId()}">
     <label for="namePlanet">Name Planet:</label>
     <br>
     <input type="text" name="namePlanet" id="namePlanet" value="${planet.getName()}">
@@ -18,7 +19,7 @@
     <label for="habitablePlanet">Habitable:</label>
     <br>
     <input type="checkbox" name="habitablePlanet" id="habitablePlanet"
-           value="true" ${(planet.isHabitable())?"checked":""}>
+           value="SI" ${(planet.isHabitable())?"checked":""}>
     <br><br>
     <input type="submit" value="Submit">
 </form>

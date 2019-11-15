@@ -87,7 +87,8 @@ public class DAOPlanet implements DAO<Planet> {
         String newNamePlanet = planet.getName();
         float newMassPlanet = planet.getMass();
         boolean newIsHabitable = planet.isHabitable();
-        sql = "UPDATE planeta SET nom = ?, massa = ?, habitable = ? WHERE idplaneta = ?";
+        sql = "UPDATE planeta SET nom=?, massa=?, habitable=? WHERE idplaneta=?";
+        System.out.println(sql);
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, newNamePlanet);
