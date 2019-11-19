@@ -75,6 +75,7 @@ public class DAOPlanet implements DAO<Planet> {
             preparedStatement.setFloat(2, massPlanet);
             preparedStatement.setBoolean(3, habitablePlanet);
             preparedStatement.executeUpdate();
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -96,6 +97,7 @@ public class DAOPlanet implements DAO<Planet> {
             preparedStatement.setBoolean(3, newIsHabitable);
             preparedStatement.setLong(4, idPlanet);
             preparedStatement.executeUpdate();
+            preparedStatement.close();
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -28,9 +28,9 @@ public class DAOConnection {
         return connection.conn;
     }
 
-    public void desconection(){
+    public static void desconection(){
         try {
-            this.conn.close();
+            connection.conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
