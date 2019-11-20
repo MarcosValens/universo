@@ -6,30 +6,26 @@
     <title>Title</title>
 </head>
 <body>
-<form action="updateRemoveServletController" method="post">
+<c:import url="template/menu.html"></c:import>
     <table>
         <tr>
-            <th>For Delete</th>
             <th>ID</th>
             <th>Name</th>
             <th>Mass</th>
+            <th>Speed</th>
             <th>Planet</th>
+            <th>Operations</th>
         </tr>
         <c:forEach var="satellite" items="${satellites}">
             <tr>
-                <td><input type="checkbox" name="selectedPlanets" value="${satellite.getName()}"></td>
                 <td>${satellite.getId()}</td>
                 <td>${satellite.getName()}</td>
-                <td>${satellite.getMass()}</td>
+                <td>${satellite.getMassa()}</td>
                 <td>${satellite.getSpeed()}</td>
                 <td>${satellite.getPlanet().getName()}</td>
-                <td><input type="submit" name="${satellite.getName()}" value="UpdatePlanetController"></td>
+                <td><a href="addSatellite?idSatellite=${satellite.getId()}">Edit</a></td>
             </tr>
         </c:forEach>
-        <tr>
-            <td><input type="submit" name="delete" value="DELETE ALL SELECTED"></td>
-        </tr>
     </table>
-</form>
 </body>
 </html>

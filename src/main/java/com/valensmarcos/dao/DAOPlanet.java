@@ -79,7 +79,6 @@ public class DAOPlanet implements DAO<Planet> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -106,6 +105,6 @@ public class DAOPlanet implements DAO<Planet> {
 
     @Override
     public void delete(Planet planet) {
-
+        System.out.println("delete");
     }
 }

@@ -44,6 +44,7 @@ public class PlanetFormController extends HttpServlet {
         planet.setHabitable(habitablePlanet);
         DAOPlanet daoPlanet;
         daoPlanet = new DAOPlanet();
+        planets = daoPlanet.getAll();
         if (req.getParameter("idPlanet").equals("")) {
             daoPlanet.save(planet);
             planets = daoPlanet.getAll();
@@ -52,7 +53,6 @@ public class PlanetFormController extends HttpServlet {
         } else {
             planet.setId(Long.parseLong(req.getParameter("idPlanet")));
             daoPlanet.update(planet);
-            planets = daoPlanet.getAll();
             req.setAttribute("planets", planets);
             req.getRequestDispatcher("/planet.jsp").forward(req, resp);
         }

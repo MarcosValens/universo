@@ -1,19 +1,16 @@
 package com.valensmarcos.dao;
 
+import com.valensmarcos.model.Planet;
 import com.valensmarcos.model.Satellite;
 
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DAOSatellite implements DAO<Satellite> {
 
     private Connection conn = DAOConnection.getConnection();
-    private Statement stmt = conn.createStatement();
     private String sql;
 
     public DAOSatellite() throws SQLException {
@@ -21,33 +18,49 @@ public class DAOSatellite implements DAO<Satellite> {
 
     @Override
     public Satellite get(long id) {
-        return null;
+        DAOPlanet daoPlanet = new DAOPlanet();
+        sql = "select * from satelit where idsatelit = ?";
+        Satellite satellite = new Satellite();
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setLong(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                satellite.setId(id);
+                satellite.setName(rs.getString("nom"));
+                satellite.setMassa(rs.getLong("massa"));
+                satellite.setSpeed(rs.getInt("velocitat"));
+                satellite.setPlanet(daoPlanet.get(rs.getLong("planeta_idplaneta")));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error DAOPlanet.get:" + e.getMessage());
+        }
+        return satellite;
     }
 
     @Override
     public List<Satellite> getAll() {
         ArrayList satellites = new ArrayList();
         sql = "select * from satelit";
+        PreparedStatement preparedStatement;
         ResultSet rs;
         try {
-            rs = stmt.executeQuery(sql);
-            while(rs.next()){
-                long idPlanet = rs.getInt("idplaneta");
+            preparedStatement = conn.prepareStatement(sql);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int idSatellite = rs.getInt("idsatelit");
                 String nameSatellite = rs.getString("nom");
                 long massSatellite = rs.getLong("massa");
                 int speedSatellite = rs.getInt("velocitat");
                 int satelliteOf = rs.getInt("planeta_idplaneta");
-                /*
-                 * USAR DAOPlaneta para obtener el planeta e insertarlo en el satellite???
-                 *
-                 *
-                 *
-                 * */
+                DAOPlanet daoPlanet = new DAOPlanet();
+                Planet planet = daoPlanet.get(satelliteOf);
                 Satellite satellite = new Satellite();
-                satellite.setId(idPlanet);
+                satellite.setId(idSatellite);
                 satellite.setName(nameSatellite);
                 satellite.setMassa(massSatellite);
                 satellite.setSpeed(speedSatellite);
+                satellite.setPlanet(planet);
                 satellites.add(satellite);
             }
         } catch (SQLException e) {
@@ -58,13 +71,21 @@ public class DAOSatellite implements DAO<Satellite> {
     }
 
     @Override
-    public void save(Satellite satellite)  {
+    public void save(Satellite satellite) {
+        PreparedStatement preparedStatement;
         String nameSatellite = satellite.getName();
-        long massPlanet = satellite.getMassa();
+        long massSatellite = satellite.getMassa();
         int speedSatellite = satellite.getSpeed();
-        sql = "insert into satelit(nom,massa,velocitat) value('"+nameSatellite+"',"+massPlanet+","+speedSatellite+")";
+        Long idPlanetOf = satellite.getPlanet().getId();
+        sql = "insert into satelit (nom, massa, velocitat, planeta_idplaneta) VALUES (?,?,?,?);";
         try {
-            stmt.executeUpdate(sql);
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, nameSatellite);
+            preparedStatement.setLong(2, massSatellite);
+            preparedStatement.setInt(3, speedSatellite);
+            preparedStatement.setLong(4, idPlanetOf);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -73,6 +94,23 @@ public class DAOSatellite implements DAO<Satellite> {
     @Override
     public void update(Satellite satellite) {
 
+        long idSatellite = satellite.getId();
+        String newNameSatellite = satellite.getName();
+        float newMassSatellite = satellite.getMassa();
+        int newSpeedSatellite = satellite.getSpeed();
+        sql = "UPDATE satelit SET nom=?, massa=?, velocitat=? WHERE idsatelit=?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, newNameSatellite);
+            preparedStatement.setFloat(2, newMassSatellite);
+            preparedStatement.setInt(3, newSpeedSatellite);
+            preparedStatement.setLong(4, idSatellite);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

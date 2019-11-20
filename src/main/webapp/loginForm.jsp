@@ -7,8 +7,6 @@
 </head>
 <body>
 
-<c:import url="template/menu.html"></c:import>
-
 <c:if test="${errorValidation}">
     <h2>Error Validation</h2>
 </c:if>
