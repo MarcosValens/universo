@@ -14,11 +14,11 @@ public class DAOSatellite implements DAO<Satellite> {
     private Connection conn = DAOConnection.getConnection();
     private String sql;
 
-    private  DAOSatellite() {
+    private DAOSatellite() {
     }
 
-    public synchronized static DAOSatellite getInstance(){
-        if (daoSatellite == null){
+    public synchronized static DAOSatellite getInstance() {
+        if (daoSatellite == null) {
             daoSatellite = new DAOSatellite();
         }
         return daoSatellite;
@@ -51,30 +51,28 @@ public class DAOSatellite implements DAO<Satellite> {
         ArrayList satellites = new ArrayList();
         sql = "select * from satelit";
         PreparedStatement preparedStatement;
-        ResultSet rs;
         try {
             preparedStatement = conn.prepareStatement(sql);
-            rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                int idSatellite = rs.getInt("idsatelit");
-                String nameSatellite = rs.getString("nom");
-                long massSatellite = rs.getLong("massa");
-                int speedSatellite = rs.getInt("velocitat");
-                int satelliteOf = rs.getInt("planeta_idplaneta");
-                /*DAOPlanet daoPlanet = new DAOPlanet();*/
-                Planet planet = DAOPlanet.getInstance().get(satelliteOf);
-                Satellite satellite = new Satellite();
-                satellite.setId(idSatellite);
-                satellite.setName(nameSatellite);
-                satellite.setMassa(massSatellite);
-                satellite.setSpeed(speedSatellite);
-                satellite.setPlanet(planet);
-                satellites.add(satellite);
-            }
+            satellites = queryGetSatellites(preparedStatement);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return satellites;
+    }
 
+    public ArrayList getSatellitesOfPlanet(Planet planet) {
+        ArrayList satellites = new ArrayList();
+        long idPlanet = planet.getId();
+        sql = "SELECT * FROM satelit WHERE planeta_idplaneta=?";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setLong(1, idPlanet);
+            satellites =  queryGetSatellites(preparedStatement);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return satellites;
     }
 
@@ -125,6 +123,43 @@ public class DAOSatellite implements DAO<Satellite> {
 
     @Override
     public void delete(Satellite satellite) {
+        sql = "DELETE FROM satelit WHERE idsatelit=?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setLong(1, satellite.getId());
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+
+
+    private ArrayList<Satellite> queryGetSatellites(PreparedStatement preparedStatement) {
+        ArrayList<Satellite> satellites = new ArrayList<>();
+        ResultSet rs;
+        try {
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int idSatellite = rs.getInt("idsatelit");
+                String nameSatellite = rs.getString("nom");
+                long massSatellite = rs.getLong("massa");
+                int speedSatellite = rs.getInt("velocitat");
+                int satelliteOf = rs.getInt("planeta_idplaneta");
+                /*DAOPlanet daoPlanet = new DAOPlanet();*/
+                Planet newPlanet = DAOPlanet.getInstance().get(satelliteOf);
+                Satellite satellite = new Satellite();
+                satellite.setId(idSatellite);
+                satellite.setName(nameSatellite);
+                satellite.setMassa(massSatellite);
+                satellite.setSpeed(speedSatellite);
+                satellite.setPlanet(newPlanet);
+                satellites.add(satellite);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return satellites;
     }
 }

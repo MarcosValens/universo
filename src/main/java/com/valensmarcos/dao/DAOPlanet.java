@@ -114,6 +114,15 @@ public class DAOPlanet implements DAO<Planet> {
 
     @Override
     public void delete(Planet planet) {
-        System.out.println("delete");
+        long idPlanet = planet.getId();
+        sql = "DELETE FROM planeta WHERE idplaneta=?";
+        try  {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setLong(1,idPlanet);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

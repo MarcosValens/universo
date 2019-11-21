@@ -28,6 +28,7 @@
             <form action="deleteSatellite" method="post">
                 <td>
                     <button type="submit">Delete</button>
+                    <input type="hidden" name="satelliteId" value="${satellite.getId()}">
                 </td>
             </form>
         </tr>

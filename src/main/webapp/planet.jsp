@@ -8,7 +8,7 @@
 <body>
 <c:import url="template/helloUser.jsp"></c:import>
 <c:import url="template/menu.html"></c:import>
-<form action="addPlanet" method="post">
+<form action="deletePlanet" method="post">
     <table>
         <tr>
             <th>ID</th>
@@ -26,6 +26,7 @@
                 <td><a href="addPlanet?id=${planet.getId()}">Edit</a></td>
                 <td>
                     <button type="submit">Delete</button>
+                    <input type="hidden" name="planetId" value="${planet.getId()}">
                 </td>
             </tr>
         </c:forEach>
