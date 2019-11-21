@@ -64,6 +64,24 @@ public class DAOUser implements DAO<User> {
         return user;
     }
 
+    public User getByName(String name){
+        sql = "SELECT * FROM usuari WHERE nom=?";
+        User user = new User();
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1,name);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                user.setId(rs.getInt("idusuari"));
+                user.setName(rs.getString("nom"));
+                user.setPassword(rs.getString("password"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
     @Override
     public List<User> getAll() {
         return null;
