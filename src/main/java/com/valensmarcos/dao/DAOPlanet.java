@@ -8,11 +8,21 @@ import java.util.List;
 
 
 public class DAOPlanet implements DAO<Planet> {
+
+    private static DAOPlanet daoPlanet;
     private Connection conn = DAOConnection.getConnection();
     private String sql;
 
 
-    public DAOPlanet() {
+    private DAOPlanet() {
+    }
+
+
+    public synchronized static DAOPlanet getInstance(){
+        if (daoPlanet == null){
+            daoPlanet = new DAOPlanet();
+        }
+        return daoPlanet;
     }
 
     @Override
@@ -88,7 +98,6 @@ public class DAOPlanet implements DAO<Planet> {
         float newMassPlanet = planet.getMass();
         boolean newIsHabitable = planet.isHabitable();
         sql = "UPDATE planeta SET nom=?, massa=?, habitable=? WHERE idplaneta=?";
-        System.out.println(sql);
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, newNamePlanet);

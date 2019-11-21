@@ -10,15 +10,23 @@ import java.util.List;
 
 public class DAOSatellite implements DAO<Satellite> {
 
+    private static DAOSatellite daoSatellite;
     private Connection conn = DAOConnection.getConnection();
     private String sql;
 
-    public DAOSatellite() throws SQLException {
+    private  DAOSatellite() {
+    }
+
+    public synchronized static DAOSatellite getInstance(){
+        if (daoSatellite == null){
+            daoSatellite = new DAOSatellite();
+        }
+        return daoSatellite;
     }
 
     @Override
     public Satellite get(long id) {
-        DAOPlanet daoPlanet = new DAOPlanet();
+        /*DAOPlanet daoPlanet = new DAOPlanet();*/
         sql = "select * from satelit where idsatelit = ?";
         Satellite satellite = new Satellite();
         try {
@@ -30,7 +38,7 @@ public class DAOSatellite implements DAO<Satellite> {
                 satellite.setName(rs.getString("nom"));
                 satellite.setMassa(rs.getLong("massa"));
                 satellite.setSpeed(rs.getInt("velocitat"));
-                satellite.setPlanet(daoPlanet.get(rs.getLong("planeta_idplaneta")));
+                satellite.setPlanet(DAOPlanet.getInstance().get(rs.getLong("planeta_idplaneta")));
             }
         } catch (SQLException e) {
             System.out.println("Error DAOPlanet.get:" + e.getMessage());
@@ -53,8 +61,8 @@ public class DAOSatellite implements DAO<Satellite> {
                 long massSatellite = rs.getLong("massa");
                 int speedSatellite = rs.getInt("velocitat");
                 int satelliteOf = rs.getInt("planeta_idplaneta");
-                DAOPlanet daoPlanet = new DAOPlanet();
-                Planet planet = daoPlanet.get(satelliteOf);
+                /*DAOPlanet daoPlanet = new DAOPlanet();*/
+                Planet planet = DAOPlanet.getInstance().get(satelliteOf);
                 Satellite satellite = new Satellite();
                 satellite.setId(idSatellite);
                 satellite.setName(nameSatellite);

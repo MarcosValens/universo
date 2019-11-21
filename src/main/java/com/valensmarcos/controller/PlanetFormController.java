@@ -19,8 +19,8 @@ public class PlanetFormController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("id") != null) {
             int id = Integer.parseInt(req.getParameter("id"));
-            DAOPlanet daoPlanet = new DAOPlanet();
-            Planet planet = daoPlanet.get(id);
+            /*DAOPlanet daoPlanet = new DAOPlanet();*/
+            Planet planet = DAOPlanet.getInstance().get(id);
             req.setAttribute("planet", planet);
             req.getRequestDispatcher("planetForm.jsp").forward(req, resp);
         } else {
@@ -42,17 +42,18 @@ public class PlanetFormController extends HttpServlet {
         planet.setName(namePlanet);
         planet.setMass(massPlanet);
         planet.setHabitable(habitablePlanet);
-        DAOPlanet daoPlanet;
-        daoPlanet = new DAOPlanet();
-        planets = daoPlanet.getAll();
+        /*DAOPlanet daoPlanet;*/
+        /*daoPlanet = new DAOPlanet();*/
+        planets = DAOPlanet.getInstance().getAll();
         if (req.getParameter("idPlanet").equals("")) {
-            daoPlanet.save(planet);
-            planets = daoPlanet.getAll();
+            DAOPlanet.getInstance().save(planet);
+            planets = DAOPlanet.getInstance().getAll();
             req.setAttribute("planets", planets);
             req.getRequestDispatcher("/planet.jsp").forward(req, resp);
         } else {
             planet.setId(Long.parseLong(req.getParameter("idPlanet")));
-            daoPlanet.update(planet);
+            DAOPlanet.getInstance().update(planet);
+            planets = DAOPlanet.getInstance().getAll();
             req.setAttribute("planets", planets);
             req.getRequestDispatcher("/planet.jsp").forward(req, resp);
         }
