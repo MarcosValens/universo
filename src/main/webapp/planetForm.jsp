@@ -6,6 +6,8 @@
     <title>Title</title>
 </head>
 <body>
+<c:import url="template/helloUser.jsp"></c:import>
+<c:import url="template/menu.html"></c:import>
 <form action="addPlanet" method="post">
     <input type="hidden" name="idPlanet" value="${planet.getId()}">
     <label for="namePlanet">Name Planet:</label>

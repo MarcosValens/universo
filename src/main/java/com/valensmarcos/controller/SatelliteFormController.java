@@ -61,7 +61,7 @@ public class SatelliteFormController extends HttpServlet {
             e.printStackTrace();
         }
         assert daoSatellite != null;
-        List satellites = daoSatellite.getAll();;
+        List satellites;
 
         if (req.getParameter("idSatellite").equals("")) {
             daoSatellite.save(satellite);
@@ -72,6 +72,7 @@ public class SatelliteFormController extends HttpServlet {
             satellite.setId(Long.parseLong(req.getParameter("idSatellite")));
             assert false;
             daoSatellite.update(satellite);
+            satellites = daoSatellite.getAll();
             req.setAttribute("satellites", satellites);
             req.getRequestDispatcher("/satellite.jsp").forward(req, resp);
         }

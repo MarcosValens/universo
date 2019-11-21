@@ -11,9 +11,9 @@ public interface DAO<T> {
 
     void save(T t);
 
-    default void update(T t) /*throws Exception*/ {
-        /*throw new Exception();//POR SI QUIERES QUE SE NO SE TENGA QUE IMPLEMENTAR ESTE METODO*/
-    }
+    void update(T t); /*throws Exception {
+        throw new Exception();//POR SI QUIERES QUE SE NO SE TENGA QUE IMPLEMENTAR ESTE METODO
+    }*/
 
     void delete(T t);
 }

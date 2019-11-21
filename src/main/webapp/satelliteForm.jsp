@@ -6,6 +6,7 @@
     <title>satelliteForm</title>
 </head>
 <body>
+<c:import url="template/helloUser.jsp"></c:import>
 <c:import url="template/menu.html"></c:import>
 <form action="addSatellite" method="post">
     <input type="hidden" name="idSatellite" value="${satellite.getId()}">
@@ -24,8 +25,8 @@
     <label> Select Planet
         <select name="satelliteOf">
             <c:forEach var="planet" items="${planets}">
-                <option value="${planet.getId()}">${planet.getName()}</option>
-                <%--<c:if test="${satellite.getPlanet().getName()==planet.getName()}">selected></c:if--%>
+                <option value="${planet.getId()}"  <c:if test="${satellite.getPlanet().getName()==planet.getName()}">selected</c:if>   >${planet.getName()}</option>
+
             </c:forEach>
         </select>
     </label>

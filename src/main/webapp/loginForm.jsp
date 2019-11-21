@@ -21,8 +21,10 @@
     <br>
     <input type="password" name="password" id="password">
     <br>
+    <label for="remember">Remember me?</label>
+    <input type="checkbox" name="remember" value="true" id="remember">
+    <br>
     <input type="submit" value="Login">
-
 </form>
 </body>
 </html>

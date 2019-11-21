@@ -25,6 +25,7 @@ public class LoginFormController extends HttpServlet {
             //Create the session
 
             HttpSession session = req.getSession();
+            session.setAttribute("userName",userName);
             session.setAttribute("authenticate","YES");
             session.setMaxInactiveInterval(5*60);
             resp.sendRedirect("planet");

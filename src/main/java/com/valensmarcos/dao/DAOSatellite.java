@@ -98,13 +98,15 @@ public class DAOSatellite implements DAO<Satellite> {
         String newNameSatellite = satellite.getName();
         float newMassSatellite = satellite.getMassa();
         int newSpeedSatellite = satellite.getSpeed();
-        sql = "UPDATE satelit SET nom=?, massa=?, velocitat=? WHERE idsatelit=?";
+        long newPlanetSatellite = satellite.getPlanet().getId();
+        sql = "UPDATE satelit SET nom=?, massa=?, velocitat=?, planeta_idplaneta=? WHERE idsatelit=?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, newNameSatellite);
             preparedStatement.setFloat(2, newMassSatellite);
             preparedStatement.setInt(3, newSpeedSatellite);
-            preparedStatement.setLong(4, idSatellite);
+            preparedStatement.setLong(4, newPlanetSatellite);
+            preparedStatement.setLong(5, idSatellite);
             preparedStatement.executeUpdate();
             preparedStatement.close();
 

@@ -6,6 +6,7 @@
     <title>Title</title>
 </head>
 <body>
+<c:import url="template/helloUser.jsp"></c:import>
 <c:import url="template/menu.html"></c:import>
     <table>
         <tr>
@@ -24,6 +25,9 @@
                 <td>${satellite.getSpeed()}</td>
                 <td>${satellite.getPlanet().getName()}</td>
                 <td><a href="addSatellite?idSatellite=${satellite.getId()}">Edit</a></td>
+                <td>
+                    <button type="submit">Delete</button>
+                </td>
             </tr>
         </c:forEach>
     </table>

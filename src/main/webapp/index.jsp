@@ -3,10 +3,10 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>Add Planet</title>
+    <title>Planet Manager</title>
 </head>
 <body>
-<h2>Insert Planet</h2>
+<h1>Planet Manager</h1>
 
 
 </body>
