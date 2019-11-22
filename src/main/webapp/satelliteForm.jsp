@@ -25,7 +25,8 @@
     <label> Select Planet
         <select name="satelliteOf">
             <c:forEach var="planet" items="${planets}">
-                <option value="${planet.getId()}"  <c:if test="${satellite.getPlanet().getName()==planet.getName()}">selected</c:if>   >${planet.getName()}</option>
+                <option value="${planet.getId()}"
+                        <c:if test="${satellite.getPlanet().getName()==planet.getName()}">selected</c:if>   >${planet.getName()}</option>
 
             </c:forEach>
         </select>

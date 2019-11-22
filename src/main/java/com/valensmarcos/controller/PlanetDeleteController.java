@@ -23,7 +23,7 @@ public class PlanetDeleteController extends HttpServlet {
         satellites.forEach(satellite -> DAOSatellite.getInstance().delete((Satellite) satellite));
         DAOPlanet.getInstance().delete(planet);
         List<Planet> planets = DAOPlanet.getInstance().getAll();
-        req.setAttribute("planets",planets);
-        req.getRequestDispatcher("/planet.jsp").forward(req,resp);
+        req.setAttribute("planets", planets);
+        req.getRequestDispatcher("/planet.jsp").forward(req, resp);
     }
 }

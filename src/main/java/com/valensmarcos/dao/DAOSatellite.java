@@ -68,7 +68,7 @@ public class DAOSatellite implements DAO<Satellite> {
         try {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setLong(1, idPlanet);
-            satellites =  queryGetSatellites(preparedStatement);
+            satellites = queryGetSatellites(preparedStatement);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -133,7 +133,6 @@ public class DAOSatellite implements DAO<Satellite> {
             e.printStackTrace();
         }
     }
-
 
 
     private ArrayList<Satellite> queryGetSatellites(PreparedStatement preparedStatement) {

@@ -10,7 +10,7 @@ public class Satellite implements Serializable {
     private int speed;
     private Planet planet;
 
-    public Satellite(){
+    public Satellite() {
 
     }
 

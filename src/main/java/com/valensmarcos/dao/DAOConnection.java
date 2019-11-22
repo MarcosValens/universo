@@ -7,7 +7,8 @@ import java.sql.SQLException;
 public class DAOConnection {
     private Connection conn = null;
     private static DAOConnection connection;
-    private DAOConnection(){
+
+    private DAOConnection() {
         String url = "jdbc:mysql://localhost:3306/univers";
         String driver = "com.mysql.cj.jdbc.Driver";
         String user = "marcos";
@@ -15,20 +16,20 @@ public class DAOConnection {
 
         try {
             Class.forName(driver);
-            conn = DriverManager.getConnection(url,user,password);
+            conn = DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public synchronized static Connection getConnection(){
-        if (connection == null){
+    public synchronized static Connection getConnection() {
+        if (connection == null) {
             connection = new DAOConnection();
         }
         return connection.conn;
     }
 
-    public static void desconection(){
+    public static void desconection() {
         try {
             connection.conn.close();
         } catch (SQLException e) {

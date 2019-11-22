@@ -17,12 +17,13 @@ import java.util.List;
 public class SatelliteDeleteController extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { ;
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         long idSatellite = Long.parseLong(req.getParameter("satelliteId"));
         Satellite satellite = DAOSatellite.getInstance().get(idSatellite);
         DAOSatellite.getInstance().delete(satellite);
         List satellites = DAOSatellite.getInstance().getAll();
-        req.setAttribute("satellites",satellites);
-        req.getRequestDispatcher("/satellite.jsp").forward(req,resp);
+        req.setAttribute("satellites", satellites);
+        req.getRequestDispatcher("/satellite.jsp").forward(req, resp);
     }
 }

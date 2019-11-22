@@ -6,11 +6,12 @@ import java.sql.SQLException;
 
 public class DBConnection {
     private Connection connection;
+
     public DBConnection() {
         try {
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/univers","marcos","Root");
-        } catch (SQLException ignored){
+            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/univers", "marcos", "Root");
+        } catch (SQLException ignored) {
 
         }
     }
@@ -19,7 +20,7 @@ public class DBConnection {
         return connection;
     }
 
-    public void disconnect(){
+    public void disconnect() {
         try {
             this.connection.close();
         } catch (SQLException e) {

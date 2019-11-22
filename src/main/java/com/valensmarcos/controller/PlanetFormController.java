@@ -33,7 +33,7 @@ public class PlanetFormController extends HttpServlet {
         String namePlanet = req.getParameter("namePlanet");
         float massPlanet = Float.parseFloat(req.getParameter("massPlanet"));
         boolean habitablePlanet = false;
-        if (req.getParameter("habitablePlanet") != null){
+        if (req.getParameter("habitablePlanet") != null) {
             habitablePlanet = true;
         }
         /*habitablePlanet = Boolean.parseBoolean(req.getParameter("habitablePlanet"));*/

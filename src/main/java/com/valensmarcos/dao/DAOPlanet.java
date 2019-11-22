@@ -18,8 +18,8 @@ public class DAOPlanet implements DAO<Planet> {
     }
 
 
-    public synchronized static DAOPlanet getInstance(){
-        if (daoPlanet == null){
+    public synchronized static DAOPlanet getInstance() {
+        if (daoPlanet == null) {
             daoPlanet = new DAOPlanet();
         }
         return daoPlanet;
@@ -32,7 +32,7 @@ public class DAOPlanet implements DAO<Planet> {
         Planet planet = new Planet();
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setLong(1,id);
+            preparedStatement.setLong(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 planet.setId(id);
@@ -41,7 +41,7 @@ public class DAOPlanet implements DAO<Planet> {
                 planet.setHabitable(rs.getBoolean("habitable"));
             }
         } catch (SQLException e) {
-            System.out.println("Error DAOPlanet.get:"+ e.getMessage());
+            System.out.println("Error DAOPlanet.get:" + e.getMessage());
         }
         return planet;
     }
@@ -116,9 +116,9 @@ public class DAOPlanet implements DAO<Planet> {
     public void delete(Planet planet) {
         long idPlanet = planet.getId();
         sql = "DELETE FROM planeta WHERE idplaneta=?";
-        try  {
+        try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setLong(1,idPlanet);
+            preparedStatement.setLong(1, idPlanet);
             preparedStatement.executeUpdate();
             preparedStatement.close();
         } catch (SQLException e) {
