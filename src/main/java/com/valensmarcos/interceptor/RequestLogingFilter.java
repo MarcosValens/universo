@@ -38,6 +38,7 @@ public class RequestLogingFilter implements Filter {
             User user = DAOUser.getInstance().getByName(userName);
             session.setAttribute("userName", userName);
             session.setAttribute("authenticate", "YES");
+            session.setAttribute("userObject",user);
             session.setMaxInactiveInterval(10);
             filterChain.doFilter(servletRequest, servletResponse);
         } else {

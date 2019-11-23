@@ -35,19 +35,18 @@ public class LoginFormController extends HttpServlet {
         User user = DAOUser.getInstance().authenticated(userName, password);
         if (user != null) {
             if (remember != null && remember.equals("true")) {
-                Cookie cookie = new Cookie("remember", "true");
-                cookie.setComment(userName);
+                Cookie cookie = new Cookie("userName", userName);
+                cookie.setSecure(true);
                 cookie.setMaxAge(60 * 60);
                 resp.addCookie(cookie);
             }
-
 
             //Create the session
 
             HttpSession session = req.getSession();
             session.setAttribute("userName", userName);
             session.setAttribute("authenticate", "YES");
-            session.setMaxInactiveInterval(10);
+            session.setMaxInactiveInterval(5*60);
             resp.sendRedirect("planet");
         } else {
             req.setAttribute("errorValidation", true);
