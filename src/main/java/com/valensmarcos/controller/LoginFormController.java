@@ -35,9 +35,9 @@ public class LoginFormController extends HttpServlet {
         User user = DAOUser.getInstance().authenticated(userName, password);
         if (user != null) {
             if (remember != null && remember.equals("true")) {
-                Cookie cookie = new Cookie("remember", "true");
-                cookie.setComment(userName);
+                Cookie cookie = new Cookie("userName", userName);
                 cookie.setMaxAge(60 * 60);
+                cookie.setSecure(true);
                 resp.addCookie(cookie);
             }
 
