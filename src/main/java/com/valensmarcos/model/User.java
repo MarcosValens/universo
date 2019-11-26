@@ -3,7 +3,7 @@ package com.valensmarcos.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class User implements Serializable {
+public class User implements Serializable, Cloneable {
     private long id;
     private String name;
     private String password;
@@ -57,5 +57,15 @@ public class User implements Serializable {
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    @Override
+    public Planet clone() {
+        try{
+            return (Planet)super.clone();
+        } catch (CloneNotSupportedException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

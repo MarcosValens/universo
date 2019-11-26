@@ -8,7 +8,7 @@
 <body>
 <c:import url="template/helloUser.jsp"></c:import>
 <c:import url="template/menu.html"></c:import>
-<form action="deletePlanet" method="post">
+
     <table>
         <tr>
             <th>ID</th>
@@ -25,8 +25,10 @@
                 <td>${(planet.isHabitable())?"Si":"No"}</td>
                 <td><a href="addPlanet?id=${planet.getId()}">Edit</a></td>
                 <td>
+                    <form action="deletePlanet" method="post">
                     <button type="submit">Delete</button>
                     <input type="hidden" name="planetId" value="${planet.getId()}">
+                    </form>
                 </td>
             </tr>
         </c:forEach>
@@ -34,6 +36,6 @@
             <td><input type="submit" name="delete" value="DELETE ALL SELECTED"></td>
         </tr>--%>
     </table>
-</form>
+
 </body>
 </html>

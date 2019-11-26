@@ -15,7 +15,6 @@ public class PlanetController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List planets;
-        /*DAOPlanet daoPlanet = new DAOPlanet();*/
         planets = DAOPlanet.getInstance().getAll();
         req.setAttribute("planets", planets);
         req.getRequestDispatcher("planet.jsp").forward(req, resp);

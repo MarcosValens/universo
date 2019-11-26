@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @WebServlet(name = "loginController", urlPatterns = "/login")
@@ -35,9 +36,9 @@ public class LoginFormController extends HttpServlet {
         User user = DAOUser.getInstance().authenticated(userName, password);
         if (user != null) {
             if (remember != null && remember.equals("true")) {
-                Cookie cookie = new Cookie("userName", userName);
-                cookie.setSecure(true);
-                cookie.setMaxAge(60 * 60);
+                Cookie cookie = new Cookie("remember", "YES");
+                //cookie.setSecure(true);
+                cookie.setMaxAge(60*60);
                 resp.addCookie(cookie);
             }
 
@@ -46,7 +47,8 @@ public class LoginFormController extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("userName", userName);
             session.setAttribute("authenticate", "YES");
-            session.setMaxInactiveInterval(5*60);
+            session.setAttribute("lastActivity", LocalDateTime.now());
+            session.setMaxInactiveInterval(0);
             resp.sendRedirect("planet");
         } else {
             req.setAttribute("errorValidation", true);
