@@ -4,7 +4,9 @@
 
 <web-app>
     <display-name>Archetype Created Web Application</display-name>
-
+    <welcome-file-list>
+        <welcome-file>login</welcome-file>
+    </welcome-file-list>
     <!--<filter>
         <filter-name>RequestLogingFilter</filter-name> &lt;!&ndash; mandatory &ndash;&gt;
         <filter-class>com.valensmarcos.interceptor.RequestLogingFilter</filter-class> &lt;!&ndash; mandatory &ndash;&gt;

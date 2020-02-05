@@ -15,7 +15,7 @@
     <input type="text" name="nameSatellite" id="nameSatellite" value="${satellite.getName()}">
     <br>
     <label for="massSatellite">Mass:</label>
-    <br>
+    <br>z
     <input type="text" name="massSatellite" id="massSatellite" value="${satellite.getMassa()}">
     <br>
     <label for="speedSatellite">Speed:</label>
